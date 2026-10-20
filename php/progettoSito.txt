@@ -1,0 +1,67 @@
+Questo documento è atto a spiegare l'organizzazione del mio progetto, e a motivare le mie scelte progettuali.
+ 
+ ---STRUTTURA
+Il progetto è strutturato in cartelle, ognuna delle quali racchiude tutti i file nel linguaggio che da il nome alla cartella.
+Questa decisione è stata presa per riuscire ad orientarsi meglio tra i vari file, favorendo quindi anche la manutenibilità del codice.
+
+Essendo, per natura delle specifiche, il sito composto da diverse pagine dotate di una certa complessità, ho adottato un approccio modulare, che suddividesse la totalità del codice
+richiesto per la creazione di ogni pagina in:
+ - pagine PHP principali, come home.php, offerta.php, conferma.php, login.php, registrazione.php, lista.php ecc. che gestiscono il frontend, e, con questo, presentano laddove necessario o utile, degli elementi dinamici
+ - script js dedicati alla validazione client-side dei dati, per effettuare un primo filtraggio dei dati da mandare al server, come domanda.js, lista.js, login.js, registra.js, gestisci_materiali.js, ma anche per gestire 
+    l'interattività con l'utente
+ - pagine PHP di backend, che si occupano della logica del programma e del reperimento dei dati necessari per tramite interrogazioni sql. Oltre questo, si occupano anche della validazione server-side dei dati
+    che l'utente può aver inserito nella pagina web. Le pagine di questo tipo sono: registra_azienda_back.php, registra_artigiano_back.php, material_actions.php, login_back.php
+
+Tutte le pagine presenti nel progetto hanno in comune un foglio di stile (stile.css), il quale possiede gli stili comuni a tutte le pagine, per garantire uno stile coeso e massimizzare
+la riusabilità del codice. Altri elementi comuni a tutte le pagine sono l'header e il footer, con lo scopo principale di aiutare l'utente nella navigazione.
+Infine, è presente la cartella imm, che possiede le immagini e le icone utilizzate nell'implementazione del sito.
+
+A prescindere dalla suddivisione tra pagine di frontend e pagine di backend, ogni pagina effettua controlli sulla sessione, e per le pagine
+che richiedono l'autenticazione, viene effettuato un controllo per stabilire se l'utente e autorizzato o meno e, nel caso non lo fosse, viene garantito un reinderizzamento automatico.
+
+---VALIDAZIONE DEI DATI
+Viene effettuata, come anticipato, su diversi piani. 
+Un primo 'limite' agli input viene posto tramite l'utilizzo di attributi HTML5, con l'apposizione di attributi come required, pattern, min, max
+Poi si passa alla validazione js, che effettua un primo controllo più avanzato sui campi di input inseriti dall'utente grazie all'utilizzo di espressioni regolari,
+e infine si passa alla validazione in backend, effettuata in php, che è necessaria nei casi in cui un utente sia riuscito a raggirare i sistemi di sicurezza implementati nei livelli precedenti.
+Qui, oltre che all'utilizzo di espressioni regolari, si fa uso di prepared statements per prevenire SQL injection, e funzione htmlspecialchars() per prevenire attacchi XSS. 
+Tuttavia l'attuale implementazione del sito è adatta solo a scopi didattici, in quanto per una navigazione sicura molte altre accortezze fondamentali dovrebbero essere prese, come il mantenere private e su un foglio separato le credenziali di accesso
+al db, ma anche soprattutto l'utilizzo di token sicuri e l'hashing della password, che altrimenti può essere letta in chiaro da chiunque abbia in mano il codice.
+
+Per ogni validazione si forniscono all'utente dei feedback puntuali che lo guidino, e, qualora il problema sia legato a "motivi di runtime", si cerca di rendere il messaggio user-friendly, riservando
+un approccio più tecnico nel log (che è stato utile in fase di debugging, ma che ho lasciato per permettere ad utenti esperti di avere più informazioni sull'errore)
+
+---GESTIONE OPERAZIONI COMPLESSE
+La pagina conferma.php utilizza transazioni MySQL per garantire che operazioni multiple, come la modifica delle quantità e l'aggiornamento del saldo, vengano eseguite in modo atomico e consistente. L'impiego di mysqli_begin_transaction(), commit() e rollback() salvaguarda l'integrità dei dati.
+L'interazione tra domanda.php e conferma.php permette la gestione del “carrello” attraverso la sessione, con il supporto di JavaScript per il salvataggio automatico delle scelte dell'utente, prevenendo così eventuali perdite accidentali di dati. 
+I filtri per data sono stati implementati in tutte le sezioni rilevanti (lista.php, offerta.php, domanda.php) per garantire coerenza e uniformità nell’esperienza utente.
+
+
+---ESPERIENZA UTENTE
+In merito a questo punto, inspirandomi ad alcune pagine presenti nel web, ho fatto la scelta di separare la pagina di home da un'altra che ho chiamato guida.php. La seconda, è effettivamente
+più aderente alle specifiche richieste per home, ma ho preso questa decisione per non appesantire l'interfaccia laddove non necessario, permettendo quindi ad un utente
+già esperto la navigazione del sito più piacevole e meno pesante alla vista. 
+L'uso del verde come colore principale, è legato alla connotazione ecologica del sito, ma ad esso si sono accostati colori ad alto contrasto, per mantenere degli accostamenti cromatici armoniosi e per facilitare gli utenti con problemi di vista. 
+Altre scelte che concorrono a questo scopo sono l'utilizzo di cambio di colore e cursore all'hover, ma anche l'inserimento di attributi ARIA per garantire l'accessibilità a diversi tipi di utenti.
+Altre note per gli stili usati sono l'utilizzo di font sans-serif, unità di misura relative e attributi per favorire l'adattabilità a schermi diversi per la schermata video, mentre l'utilizzo di font serif, pt, esclusione di header e footer, link, immagini (ecc) per 
+la creazione di una pagina printer-friendly.
+
+Sempre ispirandomi alle pagine con cui ci si interfaccia quotidianamente, ho deciso di rendere cliccabile il nome del sito nell'header. Tramite quest'operazione si raggiunge
+la home del sito. Infine, sempre nell'ottica di migliorare l'esperienza utente ho inserito anche un filtro con cui fosse possibile settare anche una data di fine per filtrare i materiali,
+e in offerta.php ho permesso la visualizzazione delle date su schermo come dd/mm/yyyy (non l'ho fatto anche nelle altre pagine perché mi sembrava uno spreco di risorse pressoché inutile).
+
+(Oss: nella home, sopra il footer, ci sono delle scritte il cui contrasto non è ottimale, ma ho provato ad implementare delle alternative grafiche, come il cambio
+di colore del testo o il mettere il codice in un riquadro a sfondo chiaro, ma il risultato non mi sembrava maggiormente gradevole, quindi l'ho lasciato com'era in origine;
+nella creazione di una pagina printer friendly alcune scritte le ho lasciate in darkgreen, perchè anche se la stampante è in bianco e nero, il contrasto con lo sfondo bianco
+lo reputo abbastanza buono)
+
+
+--- ALTRE SCELTE TECNICHE E COMMENTI
+I form utilizzano il metodo POST per la trasmissione dei dati, in quanto più appropriato, a parte che per quello contenente i filtri per la data (che utilizza una GET)
+
+Ogni accesso al db è fatto tramite l'utente che possiede meno privilegi possibile ma che permette di effettuare le operazioni richieste (per favorire la sicurezza)
+
+In offerta.php, il costo minimo può essere impostato a 0 perchè prevedo la possibilità di regalare materiali.
+
+In login, per validare i dati, ho usato gli stessi pattern di registrazione, ma sono un po' più permissivi solo perchè in registrazione dovrei accettare solo .;+= come caratteri speciali, 
+ma se lo faccio, non non mi farebbe entrare nei profili già definiti nel database, siccome non rispettano le stesse specifiche richieste in registrazione.

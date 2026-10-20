@@ -1,0 +1,1231 @@
+/* Reset base */
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/**********************************************************/
+/*STILI GENERICI E CONDIVISI DA PIU PAGINE*/
+/**********************************************************/
+
+body {
+    background-color:gainsboro;
+    background-position: center bottom; /* Mantiene l'immagine attaccata al fondo */
+    background-size: cover;           /* Adatta tutta l’immagine dentro il body */
+    background-attachment: fixed;       /* Rimane fissa mentre scrolli */
+    min-height: 100vh;      
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+ .container {
+    max-width: 40em; 
+    width: 90%;
+    margin: 2.5em auto;
+    padding: 2em;
+    background-color: white;
+    border-radius: 2.0em;
+ }
+
+ .main-content-wrapper {
+    width: 100%;
+    max-width: 60em; /* Larghezza massima per il contenuto*/
+    padding: 1.5em;
+    background-color: white;
+    border-radius: 0.8em;
+    display: flex; /* Utilizza flexbox per organizzare le sezioni interne */
+    flex-direction: column;
+    gap: 1.5em; /* Spazio tra le sezioni */
+    justify-content: center;
+    margin: 0 auto; /* Centra il blocco .main-content-wrapper orizzontalmente sulla pagina */
+}
+   
+  .content-area {
+    padding: 2em 1em; /* Spaziatura esterna, adatta al resto del sito */
+    flex-grow: 1; /* Permette al main di espandersi */
+}
+
+/* Titolo principale*/
+.section-heading {
+    text-align: center;
+    color: darkgreen; 
+    font-weight: 700;
+    padding-top: 0.5em; /* Spazio sopra il titolo */
+    font-size: 1.35em;
+    margin-bottom: 1.2em;
+    padding-bottom: 0.5em;
+    border-bottom: 0.05em solid lightgray;
+}
+
+/* Sottotitoli delle sezioni */
+.sub-section-heading {
+    color: darkgreen; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 0.125em solid darkgreen; /* Linea sottile sotto i sottotitoli */
+    padding-bottom: 0.6em;
+}
+
+/**************************Per campi input**************************/
+
+.input-field-group {
+    display: flex;
+    flex-direction: column; /* Label sopra input */
+    flex-grow: 1; /* Permette agli input di crescere */
+    position: relative;
+    width: 100%;
+}
+
+
+
+
+
+/****************************Tabelle******************************/
+
+    .responsive-table-wrapper {
+        overflow-x: auto; /* Abilita lo scrolling orizzontale se la tabella è troppo larga */
+    }
+
+    .data-display-table {
+        margin-top: 1.5em;
+        width: 100%; /* Fa occupare alla tabella tutto lo spazio disponibile */
+        border-collapse: collapse; /* Non ho bordi doppi nelle tabelle */
+    }
+
+    .data-display-table th {
+        background-color: darkgreen; /* Uniforme al tema */
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        
+    }
+
+    .data-display-table th,
+    .data-display-table td {
+        padding: 0.5em 1em; 
+        text-align: left; /* Per miglior leggibilità*/
+        vertical-align: middle; /* Centro vericalmente */
+        border-color:gainsboro;
+        border: 0.07em solid gainsboro;
+        min-width: 8.25em;
+        max-width: 12.5em;
+        word-wrap: break-word;      /* Spezza parole lunghe */
+        overflow : hidden;           /* Nasconde overflow */
+    }
+
+
+ /*********************** Bottoni ***************************/
+button {
+    margin-top: 0.5em;
+    width: 100%;
+    padding: 0.7em;
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.8em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: green;
+}
+
+.primary-action-btn { /*alcune proprietà sono sovrascritte per necessità di avere quello stile in guida.php, altrimenti non funzionava*/
+    background-color: darkgreen;
+    color: white;
+    padding: 0.8em 1.5em;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.primary-action-btn:hover {
+    background-color: green;
+}
+
+.secondary-action-btn {
+    background-color: darkgrey; /* Grigio scuro per i bottoni secondari */
+    padding: 0.8em 1.5em;
+    border-radius: 0.5em;
+}
+
+.secondary-action-btn:hover {
+    background-color: grey;
+}
+
+.secondary-action-btn:visited {
+    color: white;
+    font-weight: bold;
+}
+
+
+.filter-controls-group, .action-button-container {
+    width: 100%; 
+    display: flex; /* Mantieni flex per i bottoni interni */
+    flex-direction: column; /* I bottoni si impileranno uno sopra l'altro su mobile */
+    justify-content: center; /* Centra i bottoni impilati */
+    align-items: center; 
+    margin-top: 1em;
+}
+
+
+.btns a{
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    /* Rendi i bottoni di azione a larghezza piena e impilati su mobile */
+    .form-action-buttons-wrapper .primary-action-btn,
+    .form-action-buttons-wrapper .secondary-action-btn,
+    .action-button-container .primary-action-btn,
+    .action-button-container .secondary-action-btn {
+        width: 100%;
+    }
+
+    /* Rendi i campi filtro a larghezza piena su mobile */
+    .filter-controls-group, .input-field-group {
+        flex: 1 1 100%;
+    }
+}
+
+/*******************Per filtri data*******************/
+
+.filter-controls-group {
+    flex-wrap: wrap; /* bottoni messi in colonna*/
+    gap: 1.5em;
+    margin-bottom: 2em;
+    padding: 1.5em;
+    background-color: #f0f0f0; /* Sfondo chiaro per il blocco filtri */
+    border-radius: 0.6em;
+    /* Su schermi piccoli, gli elementi andranno a capo e saranno centrati */
+    align-items: flex-start;
+}
+
+/* Media query per i filtri su schermi più grandi (desktop) */
+@media (min-width: 768px) {
+    .filter-controls-group {
+        /* Su desktop, allinea gli elementi a sinistra e in fondo */
+        justify-content: flex-start;
+        align-items: flex-end; /* Allinea input e bottoni alla base */
+    }
+
+    .filter-controls-group .input-field-group {
+        flex: 1; 
+        min-width: 12.5em; /* Larghezza minima per evitare che si stringano troppo */
+    }
+
+    .filter-controls-group .action-button-container {
+        
+        flex: 0 0 auto; /* L'elemento prende solo lo spazio necessario per i bottoni */
+        flex-direction: row; 
+        justify-content: flex-end; /* Allinea a destra i bottoni */
+        margin-top: 0; /* Rimuove il margine superiore mobile */
+        gap: 1em; /* Spazio tra i bottoni affiancati */
+    }
+}
+
+
+ /***************Per messaggi di feedback*********************/
+
+.success,
+.error {
+    text-align: center;
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.success {
+    color:green;
+}
+
+.error, .field-error-feedback {
+    color: red;
+}
+
+.field-error-feedback {
+    color: red; 
+    margin-top: 0.2em; 
+    font-size: 0.9em; 
+    display: block; 
+    width: 100%; 
+    word-wrap: break-word; 
+    
+}
+.notification-banner{
+    text-align: center;
+    padding: 0.7em;
+    color: #721c24;
+    font-weight: bold;
+    background-color: #f8d7da;
+    border-radius: 0.5em;
+    margin-top: 1.5em;
+}
+
+.warning {
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.info {
+    font-weight: bold;
+    text-align: center;
+}
+
+.empty-table-message {
+    text-align: center;
+    padding: 2em;
+    color: #555;
+    font-style: italic;
+    background-color: #f0f0f0;
+    border-radius: 0.5em;
+    margin-top: 1.5em;
+}
+
+/**********************************************************/
+/* HEADER */
+/**********************************************************/
+header {
+    background-color: darkgreen;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1.5em;
+    position: relative; 
+}
+
+.barra-superiore {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Titolo a sinistra */
+.titolo {
+    font-size: 2.5em;
+    font-weight: bold;
+    flex: 1 1 auto;
+    text-decoration: none;
+    margin-right: 2em; /* Spazio per evitare sovrapposizione */
+}
+
+.titolo a, .titolo a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+/* Menu orizzontale */
+.menu {
+    flex: 1 1 auto;
+    margin-right: 15.62em; /* Spazio per l'autenticazione fissa */
+    min-width: 0; /* Permette al flex di ridursi */
+}
+
+.navigazione {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.link_nav {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5em;
+    font-size: 1.1em;
+    flex-shrink: 0; /* Impedisce ai link di ridursi */
+}
+
+.link_nav:hover {
+    text-decoration: underline;
+    color: darkgreen;
+    background-color: whitesmoke;
+    border-radius: 0.5em;
+}
+
+/* autenticazione sempre fissa a destra */
+.autenticazione {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    min-width: 11.25em;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    font-size: 0.9em;
+    text-align: right;
+}
+
+
+.auth-buttons {
+    display: flex;
+    gap: 0.5em;
+    justify-content: flex-end;
+}
+
+.auth-buttons a, .button-disabled {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: darkgreen;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.8em;
+    border: 0.1em solid white;
+    font-size: 0.9em;
+}
+
+.button-disabled {
+    color: slategrey;
+    opacity: 0.6;
+    cursor: default;
+}
+
+.auth-buttons a:hover {
+    color: darkgreen;
+    background-color: whitesmoke;
+}
+
+/* Per schermi piccoli */
+@media (max-width: 767px) {            
+    .navigazione {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    
+    /* L'autenticazione rimane fissa a destra anche su mobile */
+    .autenticazione {
+        min-width: 9.375em; /* Più compatto su mobile */
+    }
+    
+    .user-info {
+        font-size: 0.8em; /* Testo più piccolo su mobile */
+    }
+    
+    .auth-buttons a, .button-disabled {
+        padding: 0.4em 0.8em; /* Pulsanti più compatti */
+        font-size: 0.8em;
+    }
+}
+
+/* Per schermi grandi */
+@media (min-width: 768px) {
+  .titolo {
+    flex: 0 0 auto;
+    margin-right: 1em;
+  }
+
+  .nav-auth-wrapper {
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .container {
+        padding: 1.5em 1em;
+    }
+
+    fieldset {
+        padding: 1em;
+    }
+
+    button[type="submit"] {
+        font-size: 1em;
+    }
+
+  }
+
+
+/*FOOTER*/
+
+footer {
+  background-color: darkgreen;
+  color: white;
+  text-align: right;
+  font-size: 0.85em;
+  padding: 0.7em;
+  width: 100%;
+  height: 3.7em; /*Definisco un'altezza fissa per il footer */
+  display: flex; 
+  justify-content: flex-end; /* Allineo il contenuto a destra */
+}
+
+/******************************************************/
+/*  PER FORM DI REGISTRAZIONE E LOGIN*/
+/******************************************************/
+ .container h1 {
+   text-align: center;
+ }
+
+/* Titolo form */
+.container h2 {
+    text-align: center;
+    margin-bottom: 1.2em;
+    color: darkgreen;
+    font-size: 1.5em;
+}
+
+
+.ricordami {
+  display:flex;
+  align-items: center; /* Allinea verticalmente checkbox e label */
+  justify-content: center; /* Centra orizzontalmente l'intero gruppo */
+  font-size: 1em;
+  color: darkgreen;
+  margin-top: 1.5vh; 
+
+}
+
+.ricordami input[type="checkbox"] {
+    width: auto; /* sovrascrive width: 100%; della regola input generica */
+    margin-top: 0; /* Annulla il margin-top generico dell'input */
+}
+
+.ricordami label {
+    display: inline-block; /* sovrascrive display: block; della regola generica */
+    margin-left: 0.5em; /* Spazio tra checkbox e testo */
+    margin-top: 0; /* Annulla il margin-top generico della label */
+    font-weight: bold;
+    color: darkgreen; /* Assicura il colore specifico */
+}
+
+
+/**********************************************************/
+/* SPECIFICI DI REGISTAZIONE */
+/**********************************************************/
+fieldset {
+    margin-bottom: 1.5em;
+    padding: 1.2em;
+    border: 0.06em green;
+    border-radius: 0.5em;
+}
+
+
+.link_reg, .link_reg:visited, .link_reg a {
+  font-size: 1em;
+  text-align: center;
+  color: darkgreen;
+  margin-top: 3vh; 
+
+}
+
+legend {
+    padding: 0 0.625em;
+    font-weight: bold;
+    color: darkgreen;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+/* Etichette e input */
+label {
+    display: block;
+    margin-top: 0.7em;
+    font-weight: bold;
+    color: green;
+    font-size: 1em;
+}
+
+input {
+    width: 100%;
+    padding: 0.6em;
+    margin-top: 0.1em;
+    border: 0.09em solid green;
+    border-radius: 0.25em;
+    font-size: 1em;
+}
+
+
+
+/*Form di registrazione allineati */
+.forms {
+  display: flex; 
+  flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+  justify-content: center; /* Centra i form orizzontalmente */
+  align-items: flex-start; /* Allinea i form in alto se hanno altezze diverse */
+  gap: 2em; /* Aggiunge spazio tra i form */
+  padding: 1em; /* Aggiunge padding attorno ai form */
+  flex-grow: 1; /* Permette alla sezione dei form di crescere e spingere il footer verso il basso */
+  margin-bottom: 2em; /* Aggiunge spazio sotto la sezione dei form */
+}
+
+
+.forms .container {
+  flex: 1 1 45%; /* Permette ai container di crescere e restringersi, a partire dal 45% di larghezza */
+  min-width: 18.75em; /* Imposta una larghezza minima per i form prima che vadano a capo */
+  margin: 0; /* Rimuovi il margine fisso qui, lasciando che flexbox gestisca la spaziatura */
+}
+
+
+/**********************************************************/
+/* SPECIFICI DELLA HOME*/
+/**********************************************************/
+ .descrizione {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 12.5vw;   /*per rendere apprezzabile .ultimo */
+    font-size: 2.0em;
+    text-align: center;
+    color: darkgreen;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.descrizione a, .descrizione a:visited {
+    color: darkgreen;
+}
+
+/*sfondo per la home*/
+.home { 
+   background-image: url("/PROGETTO_ESAME/img/sfondo_ok3.png");
+}
+
+.primo {
+    padding-top: 25vh;
+}
+
+.ultimo {
+  width: fit-content;
+  font-size: 1em;
+  text-align: center;
+  color: darkgreen;
+  margin-top: auto; /* spingerà .ultimo verso il basso, sopra il footer */
+  margin-bottom: 0; /* No margine inferiore */
+  padding-bottom: 0.2em; 
+ /* opacity: 30%;    !!!HO PROVATO A METTERE UN RIQUADRO PER .ULTIMO MA L'EFFETTO FINALE SECONDO ME NON ERA CONVINCENTE
+  background-color: whitesmoke;
+  border-radius: 1em; 
+  padding:  0.5em 0.3em;*/
+  margin: 0 auto; /* Per centrare orizzontalmente il div */  
+}
+
+.ultimo a, .ultimo a:visited {
+    color: darkgreen;
+}
+
+main { /*altrimenti .ultimo si sovrappone con il footer*/
+  flex-grow: 1; /* Questo farà in modo che il main occupi tutto lo spazio disponibile */
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-end; /* Sposta il contenuto di main verso il basso */
+}
+
+/***********************************************************/
+/*CODICE PER OFFERTA*/
+/**********************************************************/
+
+.titolo-materiali {
+  color: darkgreen;
+  font-size: 1.8em;
+  text-align: center;
+}
+
+textarea {
+    width: 100%;
+    vertical-align: middle;
+    box-sizing: border-box;
+    resize : vertical; /*NON VA FUORI DAI BORDI*/
+}
+
+.card-style {
+    background-color: white;
+    padding: 2em;
+    border-radius: 0.8em;
+    border: 0.05em solid lightgrey ;
+}
+
+.cost-control-group {
+    display: flex; /* Attiva Flexbox */
+    flex-direction: column; /* Impila gli elementi verticalmente */
+    align-items: center; /* Centra orizzontalmente gli elementi all'interno del contenitore */
+    gap: 0.2em; 
+    flex-grow: 1;
+    text-align: center; 
+    margin: 0 0.5em;
+}
+
+
+
+.view-actions-container {
+    display: flex; /* Usa Flexbox per allineare gli elementi orizzontalmente */
+    justify-content: center; /* Centra orizzontalmente i bottoni all'interno della cella */
+    align-items: center; /* Allinea verticalmente i bottoni */
+    gap: 0.5em; /* Aggiunge un piccolo spazio tra i bottoni */
+
+}
+
+.data-entry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; }/* Spazio tra i gruppi di input 
+
+/* Stili per il contenitore degli stepper e dell'input del costo */
+
+
+.data-display-table tbody tr:hover {
+    background-color: whitesmoke;
+}
+
+/* Stili per le celle in modalità display e modifica */
+.display-mode-text {
+    display: block; /* Mantiene il testo su una riga */
+    word-wrap: break-word; /* Permette al testo lungo di andare a capo */
+}
+
+.edit-mode-input, .edit-actions-container {
+    display: none; /* Nascosto di default */
+}
+
+/* Stili per le azioni nella tabella (modifica, elimina, salva, annulla) */
+.table-actions-cell {
+    white-space: nowrap; /* Impedisce che i bottoni vadano a capo */
+    text-align: center;
+}
+
+
+/* Sovrascrivi il colore di sfondo predefinito per i bottoni icona */
+.action-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3em; /* Padding leggero per l'area cliccabile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.action-icon-btn:hover {
+    background: lightgray;
+
+}
+
+.action-icon-btn img {
+    width: 1.5em; /* Dimensione delle icone */
+    height: 1.5em;
+}
+
+.inline-form-delete {
+    display: flex; /* Permette al form di stare sulla stessa linea del bottone */
+    margin: 0;
+    padding: 0;
+
+}
+
+/* Input in modalità modifica nella tabella */
+.data-display-table .edit-mode-input {
+    padding: 0.5em;
+    border: 0.1em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.data-display-table .quantity-input {
+    width: 5em;
+    text-align: center;
+}
+
+
+.data-display-table .description-textarea {
+    min-height: 3em;
+    max-height: 6em;
+    overflow-y: auto;
+}
+
+
+
+/*PER LA PAGINA DI FINE*/
+.main-content-wrapper-fine {
+    width: 100%;
+    max-width: 60em; /* Larghezza massima per il contenuto */
+    padding: 1.5em;
+    background-color: white;
+    border-radius: 0.8em;
+    display: flex; /* Utilizza flexbox per organizzare le sezioni interne */
+    flex-direction: column;
+    gap: 1.5em; /* Spazio tra le sezioni */
+    justify-content: center;
+    margin: auto; /* Centra il blocco .main-content-wrapper sulla pagina */
+}
+
+
+
+/*DOMANDA*/
+.user-info-display, .purchase-summary {
+    padding: 0.9em;
+    font-size: 1.2em;
+}
+
+
+
+/*******************************************/
+/*STILI PER GUIDA*/
+/*******************************************/
+
+/* Paragrafi della sezione introduttiva */
+.intro-section p, .how-it-works p {
+    font-size: 1.05em; /* Leggermente più grande */
+    line-height: 1.7;
+    text-align: justify; 
+    margin-bottom: 1.2em;
+    max-width: 46em; /* Limita la larghezza del testo per leggibilità */
+    margin-left: auto;
+    margin-right: auto;
+    color: #333; /* Colore testo leggermente più scuro per leggibilità */
+}
+
+/* Contenitore delle card "Come Funziona" */
+.how-it-works {
+    display: flex; /* Usa Flexbox per allineare le card */
+    flex-wrap: wrap; /* Permette alle card di andare a capo */
+    gap: 1.8em; /* Spazio tra le card */
+    justify-content: center; /* Centra le card orizzontalmente */
+}
+
+/* Stile delle singole card utente (Azienda, Artigiano) */
+.user-role-card {
+    background-color: #fefefe; /* Sfondo quasi bianco */
+    border: 0.125em solid #e5e7eb; /* Bordo sottile */
+    border-radius: 0.8em; /* Bordi arrotondati, coerente con altri container */
+    padding: 1.8em;
+    text-align: center;
+    flex: 1 1 100%; /* Occupa tutta la larghezza su mobile */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Effetti fluidi */
+}
+
+/* Container per i pulsanti nelle card utente */
+.user-role-card .action-buttons-container {
+    display: flex;
+    flex-direction: column; /* Pulsanti impilati di default (mobile) */
+    gap: 1em;
+    margin-top: 1.5em;
+    align-items: center; /* Centra i pulsanti */
+}
+
+.user-role-card:hover {
+    transform: translateY(-0.32em); /* Effetto sollevamento all'hover */
+    box-shadow: 0 0.5em 1.25em rgba(0,0,0,0.1); /* Ombra più pronunciata all'hover */
+}
+
+.user-role-card h3 {
+    color: darkgreen; /* Coerente con il tema esistente */
+    font-size: 1.3em;
+    margin-bottom: 1.2em;
+    text-transform: uppercase; /* Rende i titoli più evidenti */
+}
+
+.user-role-card ul {
+    list-style: none; /* Rimuove i pallini della lista */
+    padding: 0;
+    margin-bottom: 1.5em;
+    text-align: left; /* Allinea il testo delle liste a sinistra */
+}
+
+.user-role-card li {
+    margin-bottom: 0.8em;
+    font-size: 1em;
+    color: #555;
+    position: relative;
+    padding-left: 1.6em; /* Spazio per l'icona di spunta */
+}
+
+.user-role-card li::before {
+    content: '✓'; /* Icona di spunta */
+    color: darkgreen; /* Verde per le spunte, coerente con il tema */
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Messaggio per utente loggato */
+.current-user-message {
+    font-weight: bold;
+    color: green; /* Verde per messaggi positivi, coerente con il tema */
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    font-size: 1.05em;
+}
+
+/* sezioen benefits*/
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5em, 1fr));
+    gap: 1.2em;
+    margin-top: 2em;
+}
+
+.benefit-item {
+    background-color: #e9f7ef; /* Sfondo leggero per i benefici */
+    border-radius: 1.5em;
+    padding: 1.2em;
+    text-align: center;
+}
+
+.benefit-item h3 {
+    color: darkgreen; /* Colore verde per i titoli dei benefici */
+    font-size: 1.4em;
+    margin-bottom: 0.6em;
+}
+
+.benefit-item p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #666;
+}
+
+.last {
+    font-size: 0.2em;
+    text-align: center;
+    }
+
+/* Sezione Call to Action */
+.cta-section {
+    text-align: center;
+    margin-top: 3.5em;
+}
+
+.cta-section p {
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+    color: #333;
+}
+
+.cta-section .btns {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
+}
+
+
+
+
+/* Media Queries per la pagina Guida */
+@media (min-width: 768px) {
+    .section-heading {
+        font-size: 2.0em; /* Dimensione maggiore su desktop */
+    }
+
+    .sub-section-heading {
+        font-size: 1.5em; /* Dimensione maggiore su desktop */
+    }
+
+    .user-role-card {
+        flex: 1 1 45%; /* Due card affiancate su desktop */
+        max-width: calc(50% - 0.9em); /* Calcola la larghezza per 2 colonne con gap */
+    }
+}
+
+@media (max-width: 767px) {
+    .section-heading {
+        font-size: 1.5em; /* Adatta su schermi molto piccoli */
+    }
+
+    .sub-section-heading {
+        font-size: 1.25em; /* Adatta su schermi molto piccoli */
+    }
+
+    .user-role-card {
+        flex: 1 1 100%; /* Una card per riga su mobile */
+        max-width: 100%;
+    }
+
+
+    .cta-section .btns {
+        flex-direction: column; /* Bottoni impilati su mobile */
+        align-items: center; /* Centra i bottoni impilati */
+    }
+
+
+    .cta-section .primary-action-btn,
+    .cta-section .secondary-action-btn {
+        width: 100%; /* Bottoni a larghezza piena su mobile */
+        max-width: 18.75em; /* Limita la larghezza massima dei bottoni impilati */
+    }
+}
+
+/* Media Print */
+@media print {
+    /* Regole generali per la stampa */
+    body {
+        font-family: 'Times New Roman', Times, serif; /* Font con grazie */
+        font-size: 12pt; /* Dimensione adeguata */
+        color: black; /* Testo nero */
+        background-color: white; /* Sfondo bianco */
+        margin: 0;
+        padding: 0;
+    }
+
+     main {
+        padding: 1em;
+        display: block;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        margin-bottom: 3em;
+        overflow: visible ;
+        box-sizing: border-box ;
+        width: 100% ;
+    }
+
+    .home {
+        color : black;
+    }
+
+    /* Nascondi elementi non necessari */
+    header,
+    .menu,
+    .autenticazione,
+    .barra-superiore, /* Nascondi la barra superiore completa se non necessaria */
+    .filter-controls-group, /* Filtri non necessari in stampa */
+    .action-button-container, /* Ulteriori bottoni di azione */
+    .edit-mode-input, /* Campi di input in modalità modifica */
+    .edit-actions-container, /* Azioni di modifica */
+    .view-actions-container, /* Azioni di visualizzazione (modifica, elimina ecc.) */
+    .success, /* Messaggi di successo */
+    .error, /* Messaggi di errore */
+    .ricordami, /* "Ricordami" checkbox */
+    .link_reg, /* Link di registrazione */
+    .cta-section .btns /* Bottoni della Call to Action */ { /* Sfondo specifico della home */
+        display: none ; /* Forza la rimozione */
+    }
+
+    /* Nascondi il footer originale */
+    footer {
+        display: none ;
+    }
+
+
+    /* Regole per link */
+    a {
+        text-decoration: underline; /* Sottolinea i link */
+        color: #000; /* Colore nero per i link */
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")"; /* Mostra l'URL dopo il link */
+        word-break: break-all; /* Forza il wrap delle URL lunghe */
+        font-size: 9pt; /* Dimensione più piccola per l'URL */
+    }
+
+    /* Rimuovi sfondi e colori complessi */
+    .container,
+    .main-content-wrapper,
+    .card-style,
+    .benefit-item {
+        background-color: white ;
+        border: 0.75pt solid #ccc ; /* Bordo sottile e visibile */
+        box-shadow: none ; /* Nessuna ombra */
+        border-radius: 0 ; /* Angoli non arrotondati */
+        padding: 0.5em ;
+        margin-bottom: 1em ;
+    }
+
+    /* Fix specifico per main-content-wrapper */
+    .main-content-wrapper {
+        background-color: white ;
+        border: 0.75pt solid #ccc ;
+        box-shadow: none ;
+        border-radius: 0 ;
+        padding: 0.5em ;
+        margin-bottom: 1em ;
+        
+        box-sizing: border-box ; /* Include padding e border nella larghezza totale */
+        max-width: none ; /* Rimuovi eventuali limiti di larghezza */
+        margin-left: 0 ; /* Reset margini laterali */
+        margin-right: 0 ;
+        overflow: visible ; /* Assicura che il contenuto sia visibile */
+        width: calc(100% - 1.5pt) ;  /* Sottrai lo spessore dei bordi */
+    }
+    
+
+
+    /* Footer stampato - usando ::after su body */
+    body::after {
+        content: "© Alessia Serra (Politecnico di Torino, 2025)";
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        color: black;
+        text-align: right;
+        font-size: 8pt;
+        padding: 0.4em;
+        border-top: 0.75pt solid #ccc;
+        white-space: pre-wrap;
+        display: block;
+    }
+
+    /* Gestione delle immagini */
+    img {
+        max-width: 100%;
+        display: block; /* Rende le immagini block per un migliore layout */
+        margin: 0.5em auto; /* Centra le immagini */
+    }
+
+
+    /* Rimuovi sfondi di colore dagli elementi specifici */
+    .data-display-table {
+        border: 0.75pt solid black ;
+        border-collapse: collapse ;
+        width: 100% ;
+        max-width: 100% ;
+        table-layout: fixed ;
+        font-size: 10pt ;
+        margin: 0.5em 0 ;
+    }
+
+.data-display-table th {
+    background-color: #eee ;
+    color: black ;
+    border: 0.75pt solid #ccc ;
+    padding: 0.3em ;
+    font-size: 9pt ;
+    font-weight: bold ;
+    text-align: left ;
+    word-wrap: break-word ;
+    overflow-wrap: break-word ;
+}
+
+.data-display-table td {
+    border: 0.75pt solid #ccc ;
+    padding: 0.3em ;
+    font-size: 9pt ;
+    word-wrap: break-word ;
+    overflow-wrap: break-word ;
+    line-height: 1.2 ;
+}
+
+/* Distribuzione larghezza colonne */
+.data-display-table th:nth-child(1),
+.data-display-table td:nth-child(1) {
+    width: 20% ; /* MATERIALE */
+}
+
+.data-display-table th:nth-child(2),
+.data-display-table td:nth-child(2) {
+    width: 35% ; /* DESCRIZIONE */
+}
+
+.data-display-table th:nth-child(3),
+.data-display-table td:nth-child(3) {
+    width: 15% ; /* DATA OFFERTA */
+}
+
+.data-display-table th:nth-child(4),
+.data-display-table td:nth-child(4) {
+    width: 12% ; /* QUANTITÀ */
+    text-align: center ;
+}
+
+.data-display-table th:nth-child(5),
+.data-display-table td:nth-child(5) {
+    width: 18% ; /* COSTO */
+    text-align: right ;
+}
+
+/* Controllo overflow */
+.data-display-table th,
+.data-display-table td {
+    overflow: hidden ;
+    text-overflow: ellipsis ;
+    white-space: nowrap ;
+}
+
+/* Permetti wrap solo per descrizione */
+.data-display-table th:nth-child(2),
+.data-display-table td:nth-child(2) {
+    white-space: normal ;
+    word-break: break-word ;
+}
+
+/* Rimuovi scrollbar */
+.data-display-table,
+.table-container,
+.table-responsive {
+    overflow-x: visible ;
+    overflow-y: visible ;
+}
+
+    /* Stili per titoli e testo */
+    h1, h2, h3, h4, h5, h6 {
+        color: black ;
+        page-break-after: avoid; /* Evita che i titoli siano tagliati a fine pagina */
+    }
+
+    p, li {
+        orphans: 3; /* Evita linee orfane */
+        widows: 3; /* Evita linee vedove */
+    }
+
+    /* Specifici per i form se fossero stampati (anche se la richiesta era di rimuoverli) */
+    fieldset {
+        border: 0.75pt solid black ;
+    }
+
+    legend {
+        color: black ;
+    }
+
+    label {
+        color: black ;
+    }
+
+    input, textarea {
+        border: 0.75pt solid black ;
+        background-color: white ;
+    }
+
+    /* Assicurati che il contenuto principale occupi lo spazio necessario */
+    .content-area {
+        padding: 1em 0;
+    }
+
+    /* Forza la visibilità del testo che potrebbe essere nascosto in alcune configurazioni */
+    .display-mode-text {
+        display: block ;
+    }
+
+    /* Per la sezione "Guida", assicurati che i contenuti siano leggibili */
+    .intro-section p, .how-it-works p,
+    .user-role-card li, .benefit-item p {
+        color: black ; /* Assicura testo nero */
+        text-align: left; /* Allinea a sinistra per maggiore leggibilità su carta */
+        max-width: none; /* Rimuovi limiti di larghezza per il testo */
+    }
+
+    .user-role-card {
+        border: 0.75pt solid #ccc ;
+        background-color: white ;
+        box-shadow: none ;
+        transform: none ; /* Rimuovi effetti hover */
+    }
+
+
+    .user-role-card li::before, .current-user-message, .user-role-card h3 {
+        color: black ; 
+    }
+}

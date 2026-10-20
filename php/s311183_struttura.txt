@@ -1,0 +1,20 @@
+non sono presenti i js che "sentono" il submit del form. 
+
+conferma.php, form:fine,hidden:action submit:btn_concludi, form:indietro, hidden:purchase_items[listaItems], submit:btn_indietro, form:err, hidden:action, submit:btn_err
+domanda.php, form:dateFilterForm, date:startDateFilter, date:endDateFilter, submit: applyDateFilterBtn, reset: clearDateFilterBtn, form: purchaseForm, number: quantita[materiale], submit: purchaseForm, button: cancelSelectionBtn
+fine.php
+footer.php
+guida.php
+header.php
+home.php
+lista.php, form:dateFilterForm, date:startDateFilter, date:endDateFilter, submit: applyDateFilterBtn, reset: clearDateFilterBtn
+login_back.php
+login.php, form:login, text:user, password:pwd, checkbox:ricordami, submit:btn1, reset:btn2
+logout.php
+material_actions.php
+offerta.php, form: addNewMaterialForm, hidden:action_type, text:newMaterialName, textarea:newMaterialDescription, date:newMaterialDate, number:newMaterialQuantity, number:newMaterialCost, submit:submitNewMaterialBtn, reset:clearNewMaterialFormBtn
+            form:update, hidden: action_type, hidden: item_id, submit:submit_update, button: save, button: discard
+registra_artigiano_back.php
+registra_azienda_back.php
+registrazione.php, form: registra_azienda, text: ragione_az, text: address2_az, text:nick_az, password:password_az, submit:registra_az, reset:reset_registra_az 
+                    orm: registra_artigiano, text: name, text: surname, date:bithdate, number:credit, text: address2_art, text:nick_art, password:password_art, submit:registra_art, reset:reset_registra_art 
